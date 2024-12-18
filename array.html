@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dizi ve Döngü</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dizi ve Döngü Sayfası</h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Kitap Listesi</h2>
+        <ul id="book-list"></ul>
+    </main>
+    <script>
+        const books = ['HTML & CSS', 'JavaScript', 'React'];
+        const bookList = document.getElementById('book-list');
+        books.forEach(book => {
+            const listItem = document.createElement('li');
+            listItem.textContent = book;
+            bookList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form İşleme</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Form İşleme Sayfası</h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Kayıt Formu</h2>
+        <form onsubmit="processForm(event)">
+            <label for="name">Ad:</label>
+            <input type="text" id="name" required>
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" required>
+            <button type="submit">Kaydet</button>
+        </form>
+        <p id="output"></p>
+    </main>
+    <script>
+        function processForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            document.getElementById('output').textContent = 
+                `Ad: ${name}, E-posta: ${email}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nesne Eleman Yönetimi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Nesne Eleman Yönetimi Sayfası</h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Öğrenci Ders Kayıt Sistemi</h2>
+        <form onsubmit="addCourse(event)">
+            <label for="course">Ders Adı:</label>
+            <input type="text" id="course" required>
+            <button type="submit">Ders Ekle</button>
+        </form>
+        <h3>Kayıtlı Dersler</h3>
+        <ul id="course-list"></ul>
+        <button onclick="removeSelectedCourse()">Seçili Dersi Kaldır</button>
+    </main>
+    <script>
+        // Öğrenci nesnesi
+        const student = {
+            name: 'Ahmet',
+            age: 21,
+            department: 'Bilgisayar Mühendisliği',
+            courses: [] // Kayıtlı dersler burada tutulacak
+        };
+
+        // HTML öğelerine erişim
+        const courseInput = document.getElementById('course');
+        const courseList = document.getElementById('course-list');
+
+        // Ders ekleme işlemi
+        function addCourse(event) {
+            event.preventDefault();
+            const courseName = courseInput.value.trim();
+
+            if (courseName) {
+                // Ders adı nesneye ekleniyor
+                student.courses.push(courseName);
+
+                // Listeye görsel olarak ekleniyor
+                const listItem = document.createElement('li');
+                listItem.textContent = courseName;
+                listItem.setAttribute('data-course', courseName); // Kaldırma işlemi için veri-özellik ekleniyor
+                listItem.addEventListener('click', () => {
+                    listItem.classList.toggle('selected'); // Seçim için sınıf ekleniyor/kaldırılıyor
+                });
+                courseList.appendChild(listItem);
+
+                // Metin kutusunu temizle
+                courseInput.value = '';
+            }
+        }
+
+        // Seçili dersi kaldırma işlemi
+        function removeSelectedCourse() {
+            const selectedItems = document.querySelectorAll('#course-list .selected');
+            selectedItems.forEach(item => {
+                const courseName = item.getAttribute('data-course');
+
+                // Nesneden ders kaldırılıyor
+                const index = student.courses.indexOf(courseName);
+                if (index !== -1) {
+                    student.courses.splice(index, 1);
+                }
+
+                // Görsel olarak listeden kaldırılıyor
+                courseList.removeChild(item);
+            });
+        }
+    </script>
+</body>
+</html>
